@@ -3,8 +3,16 @@ export function createDOM(node) {
 
   const element = document.createElement(node.tag);
 
+  Object.entries(node.props).forEach(([name, value]) => {
+    element.setAttribute(name, value);
+  });
+
   // children의 deps가 얼만큼 있는지 모르니 재귀함수로 children 있을때까지 호출한다.
   // 또한 실행 컨텍스트가 깨지지 않게 bind함수로 this를 element로 고정한다.
   node.children.map(createDOM).forEach(element.appendChild.bind(element));
   return element;
+}
+
+export function render(vdom, container) {
+  container.appendChild(createDOM(vdom));
 }
