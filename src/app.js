@@ -1,15 +1,21 @@
 /** @jsx createElement */
-const { createElement, render } = require("./react");
+const { createElement, render, Component } = require("./react");
 
-function Title(props) {
-  return <h1>{props.children}</h1>;
+class Title extends Component {
+  render() {
+    return <h1>{this.props.children}</h1>;
+  }
 }
+
+// function Title(props) {
+//   return <h1>{props.children}</h1>;
+// }
 
 function Item(props) {
   return <li style={`color:${props.color}`}>{props.children}</li>;
 }
 
-const vdom = (
+const App = () => (
   <p>
     <Title>React 만들기</Title>
     <ul>
@@ -20,4 +26,4 @@ const vdom = (
   </p>
 );
 
-render(vdom, document.querySelector("#root"));
+render(<App />, document.querySelector("#root"));
